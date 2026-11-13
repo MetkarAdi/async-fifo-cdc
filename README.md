@@ -65,6 +65,3 @@ SRAM or block RAM macro.
 ## File structure
     rtl/   synthesizable design (fifo_mem, wptr_full, rptr_empty, async_fifo, sync_2ff)
     tb/    self-checking testbench
-
-this is a test message
--# this is a test message
