@@ -12,7 +12,9 @@ module rptr_empty #(parameter ADDR_W = 4) (
     wire            rempty_val;
 
     assign raddr      = rbin[ADDR_W-1:0];
-    assign rbin_next  = rbin + (rinc & ~rempty);
+    wire rinc_ok;
+    assign rinc_ok = rinc & ~rempty;
+    assign rbin_next  = rbin + {{ADDR_W{1'b0}}, rinc_ok};
     assign rgray_next = (rbin_next >> 1) ^ rbin_next;
 
     // Empty when the next read pointer has caught up with the write pointer

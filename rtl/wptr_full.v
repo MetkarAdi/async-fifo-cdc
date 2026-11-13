@@ -12,7 +12,9 @@ module wptr_full #(parameter ADDR_W = 4) (
     wire            wfull_val;
 
     assign waddr      = wbin[ADDR_W-1:0];
-    assign wbin_next  = wbin + (winc & ~wfull);
+    wire winc_ok;
+    assign winc_ok = winc & ~wfull;
+    assign wbin_next = wbin + {{ADDR_W{1'b0}}, winc_ok};
     assign wgray_next = (wbin_next >> 1) ^ wbin_next;   // binary to gray
 
     // Full when the next write pointer would catch up to the read pointer

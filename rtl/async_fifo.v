@@ -23,7 +23,7 @@ module async_fifo #(parameter DATA_W = 8, ADDR_W = 4) (
     sync_2ff #(ADDR_W+1) sync_w2r (
         .clk(rclk), .rst_n(rrst_n), .d(wptr), .q(rq2_wptr));
 
-    fifo_mem #(DATA_W, ADDR_W) mem (
+    fifo_mem #(DATA_W, ADDR_W) u_mem (
         .wclk(wclk), .wen(winc & ~wfull),
         .waddr(waddr), .raddr(raddr),
         .wdata(wdata), .rdata(rdata));
