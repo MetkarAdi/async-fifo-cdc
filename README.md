@@ -31,6 +31,25 @@ Result:
     full cycles   : 1377   empty cycles: 734
     RESULT: PASS
 
+## Synthesis (Yosys, generic gate library)
+Default configuration (8-bit data, 16 entries):
+
+| Metric | Value |
+|---|---|
+| Flip-flops | 168 |
+| Total logic cells | 392 |
+| Latches | 0 |
+
+Flop breakdown: 128 memory, 18 pointers (the top gray bit merges with the
+binary pointer), 2 status flags, 20 synchronizer flops.
+
+Lint is clean under `make lint` (Verilator `-Wall`). Run `make synth` to
+reproduce.
+
+Note: this is generic-gate synthesis, so it gives structure and size but no
+timing. The memory maps to flip-flops. A real implementation would use an
+SRAM or block RAM macro.
+
 ## Design notes
 - **Why gray code:** only one bit changes per increment, so a pointer sampled
   mid-transition by the other clock is off by at most one. That makes the

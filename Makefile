@@ -10,3 +10,9 @@ wave: sim
 
 clean:
 	rm -f *.vvp *.vcd
+
+lint:
+	verilator --lint-only -Wall --top-module async_fifo $(RTL)
+
+synth:
+	yosys -p "read_verilog $(RTL); synth -top async_fifo -flatten; stat"
